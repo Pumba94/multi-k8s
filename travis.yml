@@ -1,0 +1,17 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t pumba94/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run pumba94/react-test npm test -- --coverage
+  - docker run -e CI=true pumba94/react-test npm test
+
+after_success:
+  - docker build -t pumba94/multi-client ./client
+  - docker build -t pumba94/multi-nginx ./nginx
+  - docker build -t pumba94/multi-server ./server
+  - docker build -t pumba94/multi-worker ./worker
