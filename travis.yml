@@ -20,8 +20,3 @@ after_success:
   - docker push pumba94/multi-nginx
   - docker push pumba94/multi-server
   - docker push pumba94/multi-worker
-
-
-#Log in to docker CLI
-
-# Take images and
